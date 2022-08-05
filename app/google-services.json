@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "68449631959",
+    "project_id": "thecookbook-by-firuza",
+    "storage_bucket": "thecookbook-by-firuza.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:68449631959:android:20242ca9072333c3e0fa92",
+        "android_client_info": {
+          "package_name": "com.example.thecookbook"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "68449631959-7aku1tnum2oh7gqbq1q9te2kubdkub59.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.thecookbook",
+            "certificate_hash": "9541f591de580cc452350a1faaff660872c37aee"
+          }
+        },
+        {
+          "client_id": "68449631959-318cil10qkhmk18n0bl509b3p37qhi62.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD6FRWdTWTP3phFVX59ycsQdiqu0y2eeXg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "68449631959-318cil10qkhmk18n0bl509b3p37qhi62.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
