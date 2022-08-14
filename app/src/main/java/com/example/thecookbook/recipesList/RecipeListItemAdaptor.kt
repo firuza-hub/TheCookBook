@@ -6,16 +6,15 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.thecookbook.R
 import com.example.thecookbook.data.models.RecipeDataItem
-import com.example.thecookbook.databinding.FragmentRecipeDetailsBinding
-import kotlinx.coroutines.flow.callbackFlow
+import com.example.thecookbook.databinding.FragmentRecipesItemBinding
 
 class RecipeListItemAdaptor (private val callback: ((item: RecipeDataItem) -> Unit)? = null) :
 RecyclerView.Adapter<RecipeListItemViewHolder>() {
 
-    var data = mutableListOf<RecipeDataItem>(RecipeDataItem(123, "test recipe"))
+    private var data = mutableListOf<RecipeDataItem>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecipeListItemViewHolder {
-        val binder = DataBindingUtil.inflate<FragmentRecipeDetailsBinding>(
+        val binder = DataBindingUtil.inflate<FragmentRecipesItemBinding>(
             LayoutInflater.from(parent.context),
             R.layout.fragment_recipes_item,
             parent,
@@ -35,8 +34,13 @@ RecyclerView.Adapter<RecipeListItemViewHolder>() {
     override fun getItemCount(): Int {
         return data.size
     }
+
+    fun setNewData(newData: List<RecipeDataItem>){
+        data = newData as MutableList<RecipeDataItem>
+        notifyDataSetChanged()
+    }
 }
 
-class RecipeListItemViewHolder(val binding: FragmentRecipeDetailsBinding): RecyclerView.ViewHolder(binding.root) {
+class RecipeListItemViewHolder(val binding: FragmentRecipesItemBinding): RecyclerView.ViewHolder(binding.root) {
 
 }

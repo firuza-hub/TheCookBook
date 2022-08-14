@@ -52,6 +52,7 @@ dependencies {
 
     implementation platform('com.google.firebase:firebase-bom:30.3.1')
     implementation 'com.firebaseui:firebase-ui-auth:8.0.0'
+    implementation 'com.google.firebase:firebase-firestore-ktx'
     implementation 'com.google.android.gms:play-services-auth:20.2.0'
 
     kapt "androidx.lifecycle:lifecycle-compiler:2.5.1"

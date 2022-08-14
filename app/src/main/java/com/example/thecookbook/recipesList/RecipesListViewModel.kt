@@ -1,47 +1,61 @@
 package com.example.thecookbook.recipesList
 
-import android.app.Application
-import android.widget.Toast
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import com.example.thecookbook.data.access.RecipesRepository
-import com.example.thecookbook.data.models.RecipeDTO
 import com.example.thecookbook.data.models.RecipeDataItem
-import com.example.thecookbook.data.models.Result
-import kotlinx.coroutines.launch
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 
-class RecipesListViewModel(val app: Application,
-                           private val repository: RecipesRepository): ViewModel() {
-    private val recipes = MutableLiveData<List<RecipeDataItem>>()
+class RecipesListViewModel : ViewModel() {
+    val recipes = MutableLiveData<List<RecipeDataItem>>()
+    private val db = Firebase.firestore
 
     init {
-        loadRecipes()
+        readAllRecipesData()
+        //addTestData()
+        recipes.value = listOf(
+            RecipeDataItem("1", "Breakfast recipe", "test",20),
+            RecipeDataItem("2", "This is lunch","test",20)
+        )
     }
 
 
-    private fun loadRecipes() {
-        viewModelScope.launch {
-            //interacting with the dataSource has to be through a coroutine
-            when (val result = repository.getRecipes()) {
-                is Result.Success<*> -> {
-                    val dataList = ArrayList<RecipeDataItem>()
-                    dataList.addAll((result.data as List<RecipeDTO>).map { recipe ->
-                        //map the reminder data from the DB to the be ready to be displayed on the UI
-                        RecipeDataItem(
-                            recipe.id,
-                            recipe.title
-                        )
-                    })
-                    recipes.value = dataList
+    private fun addTestData() {
+        // Create a new user with a first and last name
+        val recipe = hashMapOf(
+            "name" to "Test meal",
+            "description" to "description for test meal",
+            "cookTimeMinutes" to 35
+        )
+
+        db.collection("recipes")
+            .add(recipe)
+            .addOnSuccessListener { documentReference ->
+                Log.d("FIRESTORE", "DocumentSnapshot added with ID: ${documentReference.id}")
+            }
+            .addOnFailureListener { e ->
+                Log.w("FIRESTORE", "Error adding document", e)
+            }
+    }
+
+    private fun readAllRecipesData() {
+
+        db.collection("recipes")
+            .get()
+            .addOnSuccessListener { result ->
+                for (document in result) {
+                    Log.d("FIRESTORE", "${document.id} => ${document.data}")
+
                 }
-                is Result.Error -> Toast.makeText(app.applicationContext, result.message, Toast.LENGTH_SHORT).show()
-                   // showSnackBar.value = result.message
+                val recipesFromFire =  result.toObjects(RecipeDataItem::class.java)
+                recipes.value = recipesFromFire
+            }
+            .addOnFailureListener { exception ->
+                Log.w("FIRESTORE", "Error getting documents.", exception)
             }
 
-            //check if no data has to be shown
-           // invalidateShowNoData()
-        }
     }
+
 
 }

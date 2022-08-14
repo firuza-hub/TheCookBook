@@ -3,22 +3,22 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-   <data>
+    <data>
+        <variable
+            name="viewModel"
+            type="com.example.thecookbook.recipesList.RecipesListViewModel" />
+    </data>
 
-      <variable
-          name="viewModel"
-          type="com.example.thecookbook.recipesList.RecipesListViewModel" />
-   </data>
-<androidx.constraintlayout.widget.ConstraintLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".recipesList.RecipesFragment">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".recipesList.RecipesFragment">
 
-   <androidx.recyclerview.widget.RecyclerView
-       android:id="@+id/rvRecipesList"
-       android:layout_width="match_parent"
-       android:layout_height="match_parent"/>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvRecipesList"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>
