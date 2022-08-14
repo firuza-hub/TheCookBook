@@ -12,6 +12,7 @@ class RecipesListViewModel : ViewModel() {
     private val db = Firebase.firestore
 
     init {
+        //TODO: Move to data access class
         readAllRecipesData()
         //addTestData()
         recipes.value = listOf(
@@ -40,7 +41,7 @@ class RecipesListViewModel : ViewModel() {
     }
 
     private fun readAllRecipesData() {
-
+//TODO: Add loader
         db.collection("recipes")
             .get()
             .addOnSuccessListener { result ->
@@ -50,9 +51,11 @@ class RecipesListViewModel : ViewModel() {
                 }
                 val recipesFromFire =  result.toObjects(RecipeDataItem::class.java)
                 recipes.value = recipesFromFire
+                //TODO: Add error handling for empty collection, for parsing error
             }
             .addOnFailureListener { exception ->
                 Log.w("FIRESTORE", "Error getting documents.", exception)
+                //TODO: Add error toaster
             }
 
     }
