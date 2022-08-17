@@ -17,24 +17,23 @@
         tools:context=".recipeDetails.RecipeDetailsFragment">
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/cvRecipeHeader"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="230dp"
+            android:layout_marginTop="-30dp"
             app:cardBackgroundColor="@color/cardview_shadow_start_color"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:cardCornerRadius="35dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:paddingTop="40dp">
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:orientation="vertical"
-                    android:padding="16dp">
+                    android:padding="30dp">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -48,12 +47,14 @@
                         android:hint="RECIPE DESCRIPTION"
                         android:text="@{recipe.description}" />
                 </LinearLayout>
+
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/ic_launcher_foreground"/>
+                    android:background="@drawable/ic_launcher_foreground" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">

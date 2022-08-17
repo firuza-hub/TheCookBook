@@ -5,12 +5,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.view.setMargins
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.thecookbook.R
 import com.example.thecookbook.data.models.RecipeDataItem
 import com.example.thecookbook.databinding.FragmentRecipesBinding
@@ -48,8 +51,15 @@ class RecipesFragment : Fragment() {
 
         binding.rvRecipesList.apply {
             this.adapter = adapter
-            layoutManager = LinearLayoutManager(requireContext())
-
+            layoutManager = object : GridLayoutManager(context, 2, GridLayoutManager.VERTICAL, false){
+                override fun checkLayoutParams(lp: RecyclerView.LayoutParams) : Boolean {
+                    // force width of viewHolder to be a fraction of RecyclerViews
+                    // this will override layout_width from xml
+                    lp.width = (width - 80) / spanCount
+                    lp.setMargins(20)
+                    return true
+                }
+            }
         }
     }
 
