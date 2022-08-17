@@ -13,7 +13,7 @@ class RecipesListViewModel : ViewModel() {
 
     init {
         //TODO: Move to data access class
-        readAllRecipesData()
+        //readAllRecipesData()
         //addTestData()
         recipes.value = listOf(
             RecipeDataItem("1", "Breakfast recipe", "test",20),
@@ -41,7 +41,7 @@ class RecipesListViewModel : ViewModel() {
     }
 
     private fun readAllRecipesData() {
-//TODO: Add loader
+        //TODO: Add loader
         db.collection("recipes")
             .get()
             .addOnSuccessListener { result ->

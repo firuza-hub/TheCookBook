@@ -9,6 +9,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.thecookbook.R
 import com.example.thecookbook.data.models.RecipeDataItem
@@ -42,7 +43,8 @@ class RecipesFragment : Fragment() {
 
     private fun setupRecyclerView() {
         val adapter = RecipeListItemAdaptor {
-            Toast.makeText(requireContext(), "item clicked", Toast.LENGTH_SHORT).show()}
+            Navigation.findNavController(binding.root)
+                .navigate(RecipesFragmentDirections.actionRecipesFragmentToRecipeDetailsFragment(it))}
 
         binding.rvRecipesList.apply {
             this.adapter = adapter
