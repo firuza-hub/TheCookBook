@@ -14,27 +14,7 @@ class RecipesListViewModel : ViewModel() {
     init {
         //TODO: Move to data access class
         readAllRecipesData()
-        //addTestData()
 
-    }
-
-
-    private fun addTestData() {
-        // Create a new user with a first and last name
-        val recipe = hashMapOf(
-            "name" to "Test meal",
-            "description" to "description for test meal",
-            "cookTimeMinutes" to 35
-        )
-
-        db.collection("recipes")
-            .add(recipe)
-            .addOnSuccessListener { documentReference ->
-                Log.d("FIRESTORE", "DocumentSnapshot added with ID: ${documentReference.id}")
-            }
-            .addOnFailureListener { e ->
-                Log.w("FIRESTORE", "Error adding document", e)
-            }
     }
 
     private fun readAllRecipesData() {
@@ -55,6 +35,30 @@ class RecipesListViewModel : ViewModel() {
                 //TODO: Add error toaster
             }
 
+    }
+
+    private fun getRecipesByNameFirestore(searchText:String){
+        db.collection("recipes")
+            .get()
+            .addOnSuccessListener { result ->
+
+                for (document in result) {
+                    Log.d("FIRESTORE", "${document.id} => ${document.data}")
+
+                }
+                val recipesFromFire =  result.toObjects(RecipeDataItem::class.java).filter { r -> searchText.isNullOrEmpty() || searchText in r.name.lowercase() }
+                recipes.value = recipesFromFire
+                //TODO: Add error handling for empty collection, for parsing error
+            }
+            .addOnFailureListener { exception ->
+                Log.w("FIRESTORE", "Error getting documents.", exception)
+                //TODO: Add error toaster
+            }
+
+    }
+
+    fun getRecipesByName(s: String) {
+        getRecipesByNameFirestore(s)
     }
 
 

@@ -1,9 +1,11 @@
 package com.example.thecookbook.recipesList
 
+import android.location.GnssAntennaInfo
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.SearchView
 import android.widget.Toast
 import androidx.core.view.setMargins
 import androidx.databinding.DataBindingUtil
@@ -35,6 +37,16 @@ class RecipesFragment : Fragment() {
             _viewModel//use this to pass view model fields to some binding adapter that will display loader
         binding.lifecycleOwner = viewLifecycleOwner
 
+        binding.svRecipes.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                _viewModel.getRecipesByName((newText?.lowercase() ?: ""))
+                return true
+            }
+        })
         setupRecyclerView()
 
         return binding.root
@@ -55,17 +67,8 @@ class RecipesFragment : Fragment() {
 
         binding.rvRecipesList.apply {
             this.adapter = adapter
-            layoutManager =
-                object : GridLayoutManager(context, 2, GridLayoutManager.VERTICAL, false) {
-                    override fun checkLayoutParams(lp: RecyclerView.LayoutParams): Boolean {
-                        // force width of viewHolder to be a fraction of RecyclerViews
-                        // this will override layout_width from xml
-                        lp.width = (width - 80) / spanCount
-                        lp.height = lp.width + 50
-                        lp.setMargins(20)
-                        return true
-                    }
-                }
+            layoutManager = GridLayoutManager(context, 2, GridLayoutManager.VERTICAL, false)
+
         }
     }
 
