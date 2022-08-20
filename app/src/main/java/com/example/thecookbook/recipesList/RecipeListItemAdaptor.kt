@@ -29,14 +29,7 @@ RecyclerView.Adapter<RecipeListItemViewHolder>() {
 
     override fun onBindViewHolder(holder: RecipeListItemViewHolder, position: Int) {
         val currentItem = data[position]
-        holder.binding.apply { item = currentItem}
-
-//        currentItem.imageUrl?.let {
-//            val imgUri = currentItem.imageUrl.toUri().buildUpon().scheme("https").build()
-//            Glide.with(context)
-//                .load(imgUri)
-//                .into(holder.binding.imageView)
-//        }
+        holder.binding.apply { recipe = currentItem}
         holder.itemView.setOnClickListener{callback?.invoke(currentItem)}
     }
 
