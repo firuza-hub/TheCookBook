@@ -2,4 +2,6 @@
     <string name="app_name">TheCookBook</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="generic_text_minutes">%1$s\nmin(s)</string>
+    <string name="generic_text_servings">%1$s\nserving(s)</string>
 </resources>

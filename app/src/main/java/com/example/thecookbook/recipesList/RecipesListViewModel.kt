@@ -13,12 +13,9 @@ class RecipesListViewModel : ViewModel() {
 
     init {
         //TODO: Move to data access class
-        //readAllRecipesData()
+        readAllRecipesData()
         //addTestData()
-        recipes.value = listOf(
-            RecipeDataItem("1", "Breakfast recipe", "test",20),
-            RecipeDataItem("2", "This is lunch","test",20)
-        )
+
     }
 
 

@@ -26,11 +26,14 @@ class RecipesFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding  = DataBindingUtil.inflate(inflater,
-                 R.layout.fragment_recipes, container, false)
+        binding = DataBindingUtil.inflate(
+            inflater,
+            R.layout.fragment_recipes, container, false
+        )
         _viewModel = ViewModelProvider(this)[RecipesListViewModel::class.java]
-        binding.viewModel = _viewModel//use this to pass view model fields to some binding adapter that will display loader
-        binding.lifecycleOwner = this
+        binding.viewModel =
+            _viewModel//use this to pass view model fields to some binding adapter that will display loader
+        binding.lifecycleOwner = viewLifecycleOwner
 
         setupRecyclerView()
 
@@ -45,21 +48,24 @@ class RecipesFragment : Fragment() {
     }
 
     private fun setupRecyclerView() {
-        val adapter = RecipeListItemAdaptor {
+        val adapter = RecipeListItemAdaptor({
             Navigation.findNavController(binding.root)
-                .navigate(RecipesFragmentDirections.actionRecipesFragmentToRecipeDetailsFragment(it))}
+                .navigate(RecipesFragmentDirections.actionRecipesFragmentToRecipeDetailsFragment(it))
+        }, requireActivity())
 
         binding.rvRecipesList.apply {
             this.adapter = adapter
-            layoutManager = object : GridLayoutManager(context, 2, GridLayoutManager.VERTICAL, false){
-                override fun checkLayoutParams(lp: RecyclerView.LayoutParams) : Boolean {
-                    // force width of viewHolder to be a fraction of RecyclerViews
-                    // this will override layout_width from xml
-                    lp.width = (width - 80) / spanCount
-                    lp.setMargins(20)
-                    return true
+            layoutManager =
+                object : GridLayoutManager(context, 2, GridLayoutManager.VERTICAL, false) {
+                    override fun checkLayoutParams(lp: RecyclerView.LayoutParams): Boolean {
+                        // force width of viewHolder to be a fraction of RecyclerViews
+                        // this will override layout_width from xml
+                        lp.width = (width - 80) / spanCount
+                        lp.height = lp.width + 50
+                        lp.setMargins(20)
+                        return true
+                    }
                 }
-            }
         }
     }
 

@@ -7,17 +7,21 @@ data class RecipeDataItem(
     val id: String,
     val name: String,
     val description: String,
-    val cookTimeInMinutes: Int
+    val imageUrl:String?,
+    val cookTimeMinutes: Int,
+    val servings: Int,
 ): Parcelable{
     constructor(parcel: Parcel) : this(
         parcel.readString()!!,
         parcel.readString()!!,
         parcel.readString()!!,
+        parcel.readString(),
+        parcel.readInt(),
         parcel.readInt()
     ) {
     }
 
-    constructor() : this("","","",1)
+    constructor() : this("","","",null,0,1)
 
     override fun describeContents(): Int {
         TODO("Not yet implemented")
