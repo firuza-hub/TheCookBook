@@ -26,14 +26,10 @@ class RecipeDetailsFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val args = RecipeDetailsFragmentArgs.fromBundle(requireArguments())
-
         binding = DataBindingUtil.inflate(
             inflater,
             R.layout.fragment_recipe_details, container, false
         )
-        binding.recipe = args.recipe
-        binding.lifecycleOwner = this
-
         val imgUrl = args.recipe.imageUrl
 
         val imgView = binding.ivRecipeImage
@@ -45,6 +41,9 @@ class RecipeDetailsFragment : Fragment() {
                 .into(imgView)
 
         }
+
+        binding.recipe = args.recipe
+        binding.lifecycleOwner = this
 
         binding.btnBack.setOnClickListener{
             Navigation.findNavController(binding.root).popBackStack()

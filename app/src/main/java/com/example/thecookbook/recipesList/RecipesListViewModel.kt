@@ -1,13 +1,14 @@
 package com.example.thecookbook.recipesList
 
+import android.app.Application
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import com.example.thecookbook.base.BaseViewModel
 import com.example.thecookbook.data.models.RecipeDataItem
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
-class RecipesListViewModel : ViewModel() {
+class RecipesListViewModel(application: Application) : BaseViewModel(application) {
     val recipes = MutableLiveData<List<RecipeDataItem>>()
     private val db = Firebase.firestore
 
@@ -18,7 +19,7 @@ class RecipesListViewModel : ViewModel() {
     }
 
     private fun readAllRecipesData() {
-        //TODO: Add loader
+        showLoading.value = true
         db.collection("recipes")
             .get()
             .addOnSuccessListener { result ->
@@ -29,10 +30,12 @@ class RecipesListViewModel : ViewModel() {
                 val recipesFromFire =  result.toObjects(RecipeDataItem::class.java)
                 recipes.value = recipesFromFire
                 //TODO: Add error handling for empty collection, for parsing error
+                showLoading.value = false
             }
             .addOnFailureListener { exception ->
                 Log.w("FIRESTORE", "Error getting documents.", exception)
                 //TODO: Add error toaster
+                showLoading.value = false
             }
 
     }

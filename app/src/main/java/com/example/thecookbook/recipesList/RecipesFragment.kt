@@ -1,21 +1,16 @@
 package com.example.thecookbook.recipesList
 
-import android.location.GnssAntennaInfo
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SearchView
-import android.widget.Toast
-import androidx.core.view.setMargins
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.thecookbook.R
 import com.example.thecookbook.data.models.RecipeDataItem
 import com.example.thecookbook.databinding.FragmentRecipesBinding
@@ -33,10 +28,9 @@ class RecipesFragment : Fragment() {
             R.layout.fragment_recipes, container, false
         )
         _viewModel = ViewModelProvider(this)[RecipesListViewModel::class.java]
-        binding.viewModel =
-            _viewModel//use this to pass view model fields to some binding adapter that will display loader
+        binding.viewModel = _viewModel
         binding.lifecycleOwner = viewLifecycleOwner
-
+        setupRecyclerView()
         binding.svRecipes.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 return false
@@ -47,7 +41,7 @@ class RecipesFragment : Fragment() {
                 return true
             }
         })
-        setupRecyclerView()
+
 
         return binding.root
     }

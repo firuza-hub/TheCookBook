@@ -29,8 +29,7 @@
                 android:id="@+id/imageView"
                 imageUrl="@{recipe.imageUrl}"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/lunch" />
+                android:layout_height="match_parent"/>
 
 
         </androidx.cardview.widget.CardView>
