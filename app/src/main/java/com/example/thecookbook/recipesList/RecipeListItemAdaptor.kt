@@ -38,7 +38,7 @@ RecyclerView.Adapter<RecipeListItemViewHolder>() {
     }
 
     fun setNewData(newData: List<RecipeDataItem>){
-        data = newData as MutableList<RecipeDataItem>
+        data = if(newData.isEmpty()) mutableListOf<RecipeDataItem>() else newData as MutableList<RecipeDataItem>
         notifyDataSetChanged()
     }
 }

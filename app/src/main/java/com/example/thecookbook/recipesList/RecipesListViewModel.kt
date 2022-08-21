@@ -1,67 +1,33 @@
 package com.example.thecookbook.recipesList
 
 import android.app.Application
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.example.thecookbook.base.BaseViewModel
+import com.example.thecookbook.data.RecipeRepository
+import com.example.thecookbook.data.access.local.db.getDatabase
+import com.example.thecookbook.data.access.remote.services.FirebaseService
 import com.example.thecookbook.data.models.RecipeDataItem
-import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.ktx.Firebase
+import kotlinx.coroutines.runBlocking
 
 class RecipesListViewModel(application: Application) : BaseViewModel(application) {
     val recipes = MutableLiveData<List<RecipeDataItem>>()
-    private val db = Firebase.firestore
+    private val firebaseService = FirebaseService()
+    private val db = getDatabase(application.applicationContext)
+    private val repo = RecipeRepository(db, firebaseService)
 
     init {
-        //TODO: Move to data access class
-        readAllRecipesData()
+        runBlocking {
+            repo.refreshRecipes()
+        }
 
-    }
-
-    private fun readAllRecipesData() {
-        showLoading.value = true
-        db.collection("recipes")
-            .get()
-            .addOnSuccessListener { result ->
-                for (document in result) {
-                    Log.d("FIRESTORE", "${document.id} => ${document.data}")
-
-                }
-                val recipesFromFire =  result.toObjects(RecipeDataItem::class.java)
-                recipes.value = recipesFromFire
-                //TODO: Add error handling for empty collection, for parsing error
-                showLoading.value = false
-            }
-            .addOnFailureListener { exception ->
-                Log.w("FIRESTORE", "Error getting documents.", exception)
-                //TODO: Add error toaster
-                showLoading.value = false
-            }
-
-    }
-
-    private fun getRecipesByNameFirestore(searchText:String){
-        db.collection("recipes")
-            .get()
-            .addOnSuccessListener { result ->
-
-                for (document in result) {
-                    Log.d("FIRESTORE", "${document.id} => ${document.data}")
-
-                }
-                val recipesFromFire =  result.toObjects(RecipeDataItem::class.java).filter { r -> searchText.isNullOrEmpty() || searchText in r.name.lowercase() }
-                recipes.value = recipesFromFire
-                //TODO: Add error handling for empty collection, for parsing error
-            }
-            .addOnFailureListener { exception ->
-                Log.w("FIRESTORE", "Error getting documents.", exception)
-                //TODO: Add error toaster
-            }
+        recipes.value = repo.recipes.value ?: listOf<RecipeDataItem>()
+        //TODO: when online get from firebase
 
     }
 
     fun getRecipesByName(s: String) {
-        getRecipesByNameFirestore(s)
+        //TODO: when offline get from local db
+        recipes.value = firebaseService.getRecipesByNameFirestore(s)
     }
 
 

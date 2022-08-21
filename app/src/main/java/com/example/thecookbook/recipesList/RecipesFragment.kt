@@ -48,9 +48,9 @@ class RecipesFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        _viewModel.recipes.observe(viewLifecycleOwner, Observer {
+        _viewModel.recipes.observe(viewLifecycleOwner) {
             (binding.rvRecipesList.adapter as RecipeListItemAdaptor).setNewData(it as List<RecipeDataItem>)
-        })
+        }
     }
 
     private fun setupRecyclerView() {
