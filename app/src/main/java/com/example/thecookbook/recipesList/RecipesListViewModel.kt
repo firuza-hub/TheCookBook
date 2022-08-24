@@ -7,22 +7,22 @@ import com.example.thecookbook.data.RecipeRepository
 import com.example.thecookbook.data.access.local.db.getDatabase
 import com.example.thecookbook.data.access.remote.services.FirebaseService
 import com.example.thecookbook.data.models.RecipeDataItem
-import kotlinx.coroutines.runBlocking
+import com.example.thecookbook.utils.checkForInternet
 
 class RecipesListViewModel(application: Application) : BaseViewModel(application) {
-    val recipes = MutableLiveData<List<RecipeDataItem>>()
+    var recipes = MutableLiveData<List<RecipeDataItem>>()
     private val firebaseService = FirebaseService()
     private val db = getDatabase(application.applicationContext)
     private val repo = RecipeRepository(db, firebaseService)
 
     init {
-        runBlocking {
-            repo.refreshRecipes()
+
+        if(checkForInternet(application)){
+            recipes.value =  firebaseService.getRecipes()
         }
-
-        recipes.value = repo.recipes.value ?: listOf<RecipeDataItem>()
-        //TODO: when online get from firebase
-
+        else {
+            recipes = repo.recipes as MutableLiveData<List<RecipeDataItem>>
+        }
     }
 
     fun getRecipesByName(s: String) {
