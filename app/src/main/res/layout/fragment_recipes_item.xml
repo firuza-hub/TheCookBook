@@ -7,7 +7,7 @@
 
         <variable
             name="recipe"
-            type="com.example.thecookbook.data.models.RecipeDataItem" />
+            type="com.example.thecookbook.data.access.remote.models.Recipe" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

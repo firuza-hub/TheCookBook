@@ -6,11 +6,11 @@ import com.example.thecookbook.base.BaseViewModel
 import com.example.thecookbook.data.RecipeRepository
 import com.example.thecookbook.data.access.local.db.getDatabase
 import com.example.thecookbook.data.access.remote.services.FirebaseService
-import com.example.thecookbook.data.models.RecipeDataItem
+import com.example.thecookbook.data.access.remote.models.Recipe
 import com.example.thecookbook.utils.checkForInternet
 
 class RecipesListViewModel(application: Application) : BaseViewModel(application) {
-    var recipes = MutableLiveData<List<RecipeDataItem>>()
+    var recipes = MutableLiveData<List<Recipe>>()
     private val firebaseService = FirebaseService()
     private val db = getDatabase(application.applicationContext)
     private val repo = RecipeRepository(db, firebaseService)
@@ -21,7 +21,7 @@ class RecipesListViewModel(application: Application) : BaseViewModel(application
             recipes.value =  firebaseService.getRecipes()
         }
         else {
-            recipes = repo.recipes as MutableLiveData<List<RecipeDataItem>>
+            recipes = repo.recipes as MutableLiveData<List<Recipe>>
         }
     }
 

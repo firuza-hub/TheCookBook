@@ -7,12 +7,11 @@ import android.view.ViewGroup
 import android.widget.SearchView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.thecookbook.R
-import com.example.thecookbook.data.models.RecipeDataItem
+import com.example.thecookbook.data.access.remote.models.Recipe
 import com.example.thecookbook.databinding.FragmentRecipesBinding
 
 class RecipesFragment : Fragment() {
@@ -49,7 +48,7 @@ class RecipesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         _viewModel.recipes.observe(viewLifecycleOwner) {
-            (binding.rvRecipesList.adapter as RecipeListItemAdaptor).setNewData(it as List<RecipeDataItem>)
+            (binding.rvRecipesList.adapter as RecipeListItemAdaptor).setNewData(it as List<Recipe>)
         }
     }
 

@@ -6,14 +6,13 @@ import com.example.thecookbook.data.access.local.db.RecipeDB
 import com.example.thecookbook.data.access.local.models.asDatabaseModel
 import com.example.thecookbook.data.access.local.models.asDomainModel
 import com.example.thecookbook.data.access.remote.services.FirebaseService
-import com.example.thecookbook.data.models.RecipeDataItem
+import com.example.thecookbook.data.access.remote.models.Recipe
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
 
 class RecipeRepository(private val db: RecipeDB, private val firebaseService: FirebaseService) {
 
-    var recipes: LiveData<List<RecipeDataItem>> =
+    var recipes: LiveData<List<Recipe>> =
         Transformations.map(db.recipeDao.getRecipes()) { it.asDomainModel() }
 
     suspend fun refreshRecipes() {

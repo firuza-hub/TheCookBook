@@ -3,18 +3,16 @@ package com.example.thecookbook.recipesList
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.net.toUri
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.example.thecookbook.R
-import com.example.thecookbook.data.models.RecipeDataItem
+import com.example.thecookbook.data.access.remote.models.Recipe
 import com.example.thecookbook.databinding.FragmentRecipesItemBinding
 
-class RecipeListItemAdaptor (private val callback: ((item: RecipeDataItem) -> Unit)? = null, val context: Context) :
+class RecipeListItemAdaptor (private val callback: ((item: Recipe) -> Unit)? = null, val context: Context) :
 RecyclerView.Adapter<RecipeListItemViewHolder>() {
 
-    private var data = mutableListOf<RecipeDataItem>()
+    private var data = mutableListOf<Recipe>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecipeListItemViewHolder {
         val binder = DataBindingUtil.inflate<FragmentRecipesItemBinding>(
@@ -37,8 +35,8 @@ RecyclerView.Adapter<RecipeListItemViewHolder>() {
         return data.size
     }
 
-    fun setNewData(newData: List<RecipeDataItem>){
-        data = if(newData.isEmpty()) mutableListOf<RecipeDataItem>() else newData as MutableList<RecipeDataItem>
+    fun setNewData(newData: List<Recipe>){
+        data = if(newData.isEmpty()) mutableListOf<Recipe>() else newData as MutableList<Recipe>
         notifyDataSetChanged()
     }
 }

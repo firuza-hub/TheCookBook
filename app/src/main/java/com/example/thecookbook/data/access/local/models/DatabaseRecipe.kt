@@ -3,7 +3,7 @@ package com.example.thecookbook.data.access.local.models
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.example.thecookbook.data.models.RecipeDataItem
+import com.example.thecookbook.data.access.remote.models.Recipe
 
 
 @Entity(tableName = "DatabaseRecipes")
@@ -16,9 +16,9 @@ data class DatabaseRecipe(
     val servings: Int,
 )
 
-fun List<DatabaseRecipe>.asDomainModel(): List<RecipeDataItem> {
+fun List<DatabaseRecipe>.asDomainModel(): List<Recipe> {
     return map {
-        RecipeDataItem(
+        Recipe(
             id = it.id,
             name = it.name,
             description = it.description,
@@ -28,7 +28,7 @@ fun List<DatabaseRecipe>.asDomainModel(): List<RecipeDataItem> {
     }
 }
 
-fun List<RecipeDataItem>.asDatabaseModel(): List<DatabaseRecipe> {
+fun List<Recipe>.asDatabaseModel(): List<DatabaseRecipe> {
     return map {
         DatabaseRecipe(
             id = it.id,

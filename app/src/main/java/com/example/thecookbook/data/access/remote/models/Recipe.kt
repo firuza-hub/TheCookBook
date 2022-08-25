@@ -1,10 +1,10 @@
-package com.example.thecookbook.data.models
+package com.example.thecookbook.data.access.remote.models
 
 import android.os.Parcel
 import android.os.Parcelable
 import com.google.firebase.firestore.DocumentId
 
-class RecipeDataItem(
+class Recipe(
     @DocumentId
     val id: String,
     val name: String,
@@ -38,12 +38,12 @@ class RecipeDataItem(
 
     }
 
-    companion object CREATOR : Parcelable.Creator<RecipeDataItem> {
-        override fun createFromParcel(parcel: Parcel): RecipeDataItem {
-            return RecipeDataItem(parcel)
+    companion object CREATOR : Parcelable.Creator<Recipe> {
+        override fun createFromParcel(parcel: Parcel): Recipe {
+            return Recipe(parcel)
         }
 
-        override fun newArray(size: Int): Array<RecipeDataItem?> {
+        override fun newArray(size: Int): Array<Recipe?> {
             return arrayOfNulls(size)
         }
     }
