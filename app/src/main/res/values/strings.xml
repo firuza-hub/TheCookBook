@@ -11,4 +11,6 @@ Et netus et malesuada fames.</string>
     <string name="notification_title">Your meal is ready!</string>
     <string name="recipe_notification_channel_id">ChannelId</string>
     <string name="recipe_notification_channel_name">Timer Notification Channel</string>
+    <string name="settings">Settings</string>
+    <string name="ok">Ok</string>
 </resources>

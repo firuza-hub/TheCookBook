@@ -16,10 +16,12 @@
         <entry key="..\:/Users/Firuza/StudioProjects/TheCookBook/app/src/main/res/font/alegreya_sc.xml" value="0.14322916666666666" />
         <entry key="..\:/Users/Firuza/StudioProjects/TheCookBook/app/src/main/res/layout/activity_login.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Firuza/StudioProjects/TheCookBook/app/src/main/res/layout/activity_main.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/Firuza/StudioProjects/TheCookBook/app/src/main/res/layout/fragment_camera.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Firuza/StudioProjects/TheCookBook/app/src/main/res/layout/fragment_recipe_details.xml" value="0.264" />
         <entry key="..\:/Users/Firuza/StudioProjects/TheCookBook/app/src/main/res/layout/fragment_recipes.xml" value="0.1" />
         <entry key="..\:/Users/Firuza/StudioProjects/TheCookBook/app/src/main/res/layout/fragment_recipes_item.xml" value="0.2" />
         <entry key="..\:/Users/Firuza/StudioProjects/TheCookBook/app/src/main/res/layout/fragment_timer.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/Firuza/StudioProjects/TheCookBook/app/src/main/res/xml/file_paths.xml" value="0.253125" />
       </map>
     </option>
   </component>
