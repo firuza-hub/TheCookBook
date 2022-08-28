@@ -3,7 +3,7 @@ package com.example.thecookbook.data.access.remote.services
 import android.net.Uri
 import android.util.Log
 import com.example.thecookbook.data.access.remote.models.Recipe
-import com.google.android.gms.tasks.Task
+import com.example.thecookbook.data.access.remote.models.UserMealImage
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.runBlocking
@@ -14,31 +14,37 @@ class FirebaseService {
     private var recipes = listOf<Recipe>()
     private val recipesCollection = db.collection("recipes")
 
-    public fun getRecipes(): List<Recipe> {
+    fun getRecipes(): List<Recipe> {
         readAllRecipesData()
         return recipes
     }
 
+    fun getUserMealImagesByRecipeId(recipeId: String): List<UserMealImage> {
+        return runBlocking {
+            recipesCollection.document(recipeId).collection("userMealImages").get().await()
+                .toObjects(UserMealImage::class.java)
+        }
+    }
+
+    fun addUserMealImageByRecipeId(recipeId: String,image: UserMealImage ) {
+        recipesCollection.document(recipeId)
+            .collection("userMealImages")
+            .add(image)
+            .addOnFailureListener { Log.i("MYCAMERA", it.message.toString()) }
+            .addOnSuccessListener {r -> Log.i("MYCAMERA", "image added to the recipe with id : ${r.id} ") }
+    }
+
     private fun readAllRecipesData() {
-     runBlocking {
+        runBlocking {
             recipes = recipesCollection.get().await().toObjects(Recipe::class.java)
         }
     }
 
-    public fun getRecipesByNameFirestore(searchText: String): List<Recipe> {
+    fun getRecipesByNameFirestore(searchText: String): List<Recipe> {
         readAllRecipesData()
-        return recipes.filter { r -> searchText.isNullOrEmpty() || searchText in r.name.lowercase() }
+        return recipes.filter { r -> searchText.isEmpty() || searchText in r.name.lowercase() }
 
 
     }
 
-    fun addPicToRecipe(id: String, downloadUrl: Uri) {
-
-        recipesCollection
-            .document(id)
-            .update(
-                "myPic", downloadUrl
-            ).addOnFailureListener{  Log.i("MYCAMERA", it.message.toString())}
-            .addOnSuccessListener{  Log.i("MYCAMERA","image added to the recipe")}
-    }
 }

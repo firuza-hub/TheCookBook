@@ -1,4 +1,4 @@
-package com.example.thecookbook.recipeDetails
+package com.example.thecookbook.ui.recipeDetails
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -44,6 +44,9 @@ class RecipeDetailsFragment : Fragment() {
 
         binding.btnBack.setOnClickListener{
             Navigation.findNavController(binding.root).popBackStack()
+        }
+        binding.fabTakePhoto.setOnClickListener{
+            Navigation.findNavController(binding.root).navigate(RecipeDetailsFragmentDirections.actionRecipeDetailsFragmentToCameraFragment(args.recipe.id))
         }
         return binding.root
     }

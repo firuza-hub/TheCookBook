@@ -1,4 +1,4 @@
-package com.example.thecookbook.authentication
+package com.example.thecookbook.ui.authentication
 
 import androidx.lifecycle.LiveData
 import com.google.firebase.auth.FirebaseAuth

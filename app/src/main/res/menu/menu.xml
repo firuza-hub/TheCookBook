@@ -7,7 +7,7 @@
         android:icon="@drawable/ic_baseline_menu_book_24"
         android:title="Recipes" />
     <item
-        android:id="@+id/timerFragment"
+        android:id="@+id/cameraFragment"
         android:icon="@drawable/ic_baseline_timer_24"
         android:title="Timer" />
 </menu>

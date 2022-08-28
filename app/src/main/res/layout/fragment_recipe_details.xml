@@ -17,7 +17,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         app:layoutDescription="@xml/fragment_recipe_details_xml_constraintlayout3_scene"
-        tools:context=".recipeDetails.RecipeDetailsFragment">
+        tools:context=".ui.recipeDetails.RecipeDetailsFragment">
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cvHeader"
@@ -154,6 +154,16 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tvDirectionsHeader" />
+
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/fabTakePhoto"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="15dp"
+                    android:layout_marginBottom="45dp"
+                    android:src="@drawable/photo"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>

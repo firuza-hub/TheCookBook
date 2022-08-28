@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/recipesFragment"
-        android:name="com.example.thecookbook.recipesList.RecipesFragment"
+        android:name="com.example.thecookbook.ui.recipesList.RecipesFragment"
         android:label="fragment_recipes"
         tools:layout="@layout/fragment_recipes" >
         <action
@@ -16,16 +16,23 @@
     </fragment>
     <fragment
         android:id="@+id/recipeDetailsFragment"
-        android:name="com.example.thecookbook.recipeDetails.RecipeDetailsFragment"
+        android:name="com.example.thecookbook.ui.recipeDetails.RecipeDetailsFragment"
         android:label="fragment_recipe_details"
         tools:layout="@layout/fragment_recipe_details" >
         <argument
             android:name="recipe"
             app:argType="com.example.thecookbook.data.access.remote.models.Recipe" />
+        <action
+            android:id="@+id/action_recipeDetailsFragment_to_cameraFragment"
+            app:destination="@id/cameraFragment" />
     </fragment>
     <fragment
-        android:id="@+id/timerFragment"
-        android:name="com.example.thecookbook.camera.CameraFragment"
-        android:label="fragment_timer"
-        tools:layout="@layout/fragment_camera" />
+        android:id="@+id/cameraFragment"
+        android:name="com.example.thecookbook.ui.camera.CameraFragment"
+        android:label="fragment_camer"
+        tools:layout="@layout/fragment_camera" >
+        <argument
+            android:name="recipeId"
+            app:argType="string" />
+    </fragment>
 </navigation>

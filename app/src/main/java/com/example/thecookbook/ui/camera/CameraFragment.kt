@@ -1,4 +1,4 @@
-package com.example.thecookbook.camera
+package com.example.thecookbook.ui.camera
 
 import android.Manifest
 import android.app.Activity
@@ -28,7 +28,6 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.thecookbook.BuildConfig
 import com.example.thecookbook.R
 import com.example.thecookbook.databinding.FragmentCameraBinding
-import com.example.thecookbook.recipesList.RecipesListViewModel
 import com.google.android.material.snackbar.Snackbar
 import java.io.File
 import java.io.IOException
@@ -41,6 +40,7 @@ class CameraFragment : Fragment() {
     private lateinit var binding: FragmentCameraBinding
     private lateinit var requestPermissionLauncher: ActivityResultLauncher<String>
     private lateinit var cameraActivityResultLauncher: ActivityResultLauncher<Intent>
+    private lateinit var recipeId: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -85,8 +85,8 @@ class CameraFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_camera, container, false)
-
-
+        val args = CameraFragmentArgs.fromBundle(requireArguments())
+        recipeId = args.recipeId
         _viewModel = ViewModelProvider(this)[CameraViewModel::class.java]
         createChannel(
             getString(R.string.recipe_notification_channel_id),
@@ -114,7 +114,7 @@ class CameraFragment : Fragment() {
         dispatchTakePictureIntent()
     }
 
-    private fun setPic(save:Boolean) {
+    private fun setPic(save: Boolean) {
         // Get the dimensions of the View
         val targetW: Int = binding.ivMeal.width
         val targetH: Int = binding.ivMeal.height
@@ -139,9 +139,10 @@ class CameraFragment : Fragment() {
         BitmapFactory.decodeFile(currentPhotoPath, bmOptions)?.also { bitmap ->
             binding.ivMeal.setImageBitmap(bitmap)
 
-            _viewModel.doSTUFF(bitmap)
+            _viewModel.savePic(bitmap, recipeId)
         }
     }
+
     lateinit var currentPhotoPath: String
 
     @Throws(IOException::class)
@@ -191,7 +192,6 @@ class CameraFragment : Fragment() {
         cameraActivityResultLauncher.launch(intent)
 
     }
-
 
 
     private fun requestCameraPermissionAndOpenCamera() {

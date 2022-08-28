@@ -1,4 +1,4 @@
-package com.example.thecookbook.base
+package com.example.thecookbook.ui.base
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel

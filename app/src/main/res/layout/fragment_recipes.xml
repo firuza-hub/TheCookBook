@@ -6,13 +6,13 @@
     <data>
         <variable
             name="viewModel"
-            type="com.example.thecookbook.recipesList.RecipesListViewModel" />
+            type="com.example.thecookbook.ui.recipesList.RecipesListViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".recipesList.RecipesFragment">
+        tools:context=".ui.recipesList.RecipesFragment">
 
         <ProgressBar
             android:id="@+id/progressBar"

@@ -1,4 +1,4 @@
-package com.example.thecookbook
+package com.example.thecookbook.ui
 
 import android.content.Intent
 import android.os.Bundle
@@ -10,8 +10,9 @@ import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
-import com.example.thecookbook.authentication.AuthenticationViewModel
-import com.example.thecookbook.authentication.LoginActivity
+import com.example.thecookbook.R
+import com.example.thecookbook.ui.authentication.AuthenticationViewModel
+import com.example.thecookbook.ui.authentication.LoginActivity
 import com.example.thecookbook.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {

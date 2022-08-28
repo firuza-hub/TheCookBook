@@ -1,8 +1,8 @@
-package com.example.thecookbook.recipesList
+package com.example.thecookbook.ui.recipesList
 
 import android.app.Application
 import androidx.lifecycle.MutableLiveData
-import com.example.thecookbook.base.BaseViewModel
+import com.example.thecookbook.ui.base.BaseViewModel
 import com.example.thecookbook.data.RecipeRepository
 import com.example.thecookbook.data.access.local.db.getDatabase
 import com.example.thecookbook.data.access.remote.services.FirebaseService
