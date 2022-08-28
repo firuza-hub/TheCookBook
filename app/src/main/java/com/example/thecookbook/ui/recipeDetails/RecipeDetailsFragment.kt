@@ -48,6 +48,8 @@ class RecipeDetailsFragment : Fragment() {
         binding.fabTakePhoto.setOnClickListener{
             Navigation.findNavController(binding.root).navigate(RecipeDetailsFragmentDirections.actionRecipeDetailsFragmentToCameraFragment(args.recipe.id))
         }
+        //TODO: Add button for redirection to grid of images by this and other users for the current recipe
+
         return binding.root
     }
 

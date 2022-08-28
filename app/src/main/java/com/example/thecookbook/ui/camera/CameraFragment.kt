@@ -121,7 +121,7 @@ class CameraFragment : Fragment() {
         }
         BitmapFactory.decodeFile(currentPhotoPath, bmOptions)?.also { bitmap ->
             binding.ivMeal.setImageBitmap(bitmap)
-
+        //TODO: Add button for save image, that will trigger the method below
             if(save) _viewModel.savePic(bitmap, recipeId, currentPhotoName)
         }
     }
