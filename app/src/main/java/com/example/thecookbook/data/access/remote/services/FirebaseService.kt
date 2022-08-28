@@ -1,6 +1,9 @@
 package com.example.thecookbook.data.access.remote.services
 
+import android.net.Uri
+import android.util.Log
 import com.example.thecookbook.data.access.remote.models.Recipe
+import com.google.android.gms.tasks.Task
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.runBlocking
@@ -27,5 +30,15 @@ class FirebaseService {
         return recipes.filter { r -> searchText.isNullOrEmpty() || searchText in r.name.lowercase() }
 
 
+    }
+
+    fun addPicToRecipe(id: String, downloadUrl: Uri) {
+
+        recipesCollection
+            .document(id)
+            .update(
+                "myPic", downloadUrl
+            ).addOnFailureListener{  Log.i("MYCAMERA", it.message.toString())}
+            .addOnSuccessListener{  Log.i("MYCAMERA","image added to the recipe")}
     }
 }
