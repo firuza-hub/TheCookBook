@@ -49,10 +49,8 @@ class CameraFragment : Fragment() {
             ActivityResultContracts.StartActivityForResult()
         ) { result ->
             if (result.resultCode == Activity.RESULT_OK) {
-                // There are no request codes
-                val data: Intent = result.data!!
-                val image = data.extras!!.get("data") as Bitmap
-                binding.ivMeal.setImageBitmap(image)
+                galleryAddPic()
+                setPic()
             }
         }
         requestPermissionLauncher = registerForActivityResult(
@@ -167,22 +165,22 @@ class CameraFragment : Fragment() {
                 val photoFile: File? = try {
                     createImageFile()
                 } catch (ex: IOException) {
-                    Log.i("CAMERA", ex.message.toString())
+                    Log.i("MYCAMERA", ex.message.toString())
 
                     null
                 }
                 // Continue only if the File was successfully created
-                Log.i("CAMERA", "file created successfully")
-                Log.i("CAMERA", ((photoFile?.name) ?: "nofile"))
+                Log.i("MYCAMERA", "file created successfully")
+                Log.i("MYCAMERA", ((photoFile?.name) ?: "nofile"))
                 photoFile?.also {
                     val photoURI: Uri = FileProvider.getUriForFile(
                         requireContext(),
-                        "com.example.android.fileprovider",
+                        "com.example.thecookbook.fileprovider",
                         it
                     )
-                    takePictureIntent.putExtra("data", photoURI)
-                    Log.i("CAMERA", "PUT EXTRA PHOTO URI: $photoURI")
-                    galleryAddPic()
+                    takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI)
+                    Log.i("MYCAMERA", "PUT EXTRA PHOTO URI: $photoURI")
+
                 }
             }
         }
