@@ -15,13 +15,13 @@ import java.util.*
 
 class CameraViewModel(app: Application) : BaseViewModel(app) {
     private val firebaseService = FirebaseService()
-    var storage = FirebaseStorage.getInstance()
+    private var storage = FirebaseStorage.getInstance()
 
     // Create a storage reference from our app
-    val storageRef = storage.getReferenceFromUrl("gs://thecookbook-by-firuza.appspot.com");
+    private val storageRef = storage.getReferenceFromUrl("gs://thecookbook-by-firuza.appspot.com");
 
-    fun savePic(bitmap: Bitmap, recipeId: String) {
-        val mountainsRef = storageRef.child("mountains.jpg");
+    fun savePic(bitmap: Bitmap, recipeId: String, imageName:String) {
+        val mountainsRef = storageRef.child(imageName);
 
         val baos = ByteArrayOutputStream()
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)

@@ -62,7 +62,7 @@ class CameraFragment : Fragment() {
                     "Permission granted now you can read the storage",
                     Toast.LENGTH_LONG
                 ).show()
-                openCamera()
+               dispatchTakePictureIntent()
             } else {
                 Snackbar.make(
                     requireActivity().findViewById(android.R.id.content),
@@ -88,30 +88,13 @@ class CameraFragment : Fragment() {
         val args = CameraFragmentArgs.fromBundle(requireArguments())
         recipeId = args.recipeId
         _viewModel = ViewModelProvider(this)[CameraViewModel::class.java]
-        createChannel(
-            getString(R.string.recipe_notification_channel_id),
-            getString(R.string.recipe_notification_channel_name)
-        )
-
 
 
         binding.btnStartTimer.setOnClickListener {
-//            val notificationManager = ContextCompat.getSystemService(
-//                requireActivity(),
-//                NotificationManager::class.java
-//            ) as NotificationManager
-//
-//
-//            notificationManager.sendNotification("meow", requireActivity())
-
             requestCameraPermissionAndOpenCamera()
         }
 
         return binding.root
-    }
-
-    private fun openCamera() {
-        dispatchTakePictureIntent()
     }
 
     private fun setPic(save: Boolean) {
@@ -139,11 +122,12 @@ class CameraFragment : Fragment() {
         BitmapFactory.decodeFile(currentPhotoPath, bmOptions)?.also { bitmap ->
             binding.ivMeal.setImageBitmap(bitmap)
 
-            _viewModel.savePic(bitmap, recipeId)
+            if(save) _viewModel.savePic(bitmap, recipeId, currentPhotoName)
         }
     }
 
-    lateinit var currentPhotoPath: String
+    private lateinit var currentPhotoPath: String
+    private lateinit var currentPhotoName: String
 
     @Throws(IOException::class)
     private fun createImageFile(): File {
@@ -158,6 +142,7 @@ class CameraFragment : Fragment() {
         ).apply {
             // Save a file: path for use with ACTION_VIEW intents
             currentPhotoPath = absolutePath
+            currentPhotoName = name
         }
     }
 
@@ -195,12 +180,13 @@ class CameraFragment : Fragment() {
 
 
     private fun requestCameraPermissionAndOpenCamera() {
+        //TODO: Request permission for storage write too
         when {
             ContextCompat.checkSelfPermission(
                 requireContext(),
                 Manifest.permission.CAMERA
             ) == PackageManager.PERMISSION_GRANTED -> {
-                openCamera()// You can use the API that requires the permission.
+                dispatchTakePictureIntent()// You can use the API that requires the permission.
             }
             shouldShowRequestPermissionRationale(Manifest.permission.CAMERA) -> {}
             else -> {
@@ -214,25 +200,5 @@ class CameraFragment : Fragment() {
 
     }
 
-    private fun createChannel(channelId: String, channelName: String) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val notificationChannel = NotificationChannel(
-                channelId,
-                channelName,
-                NotificationManager.IMPORTANCE_LOW
-            )
-
-            notificationChannel.enableLights(true)
-            notificationChannel.lightColor = Color.RED
-            notificationChannel.enableVibration(true)
-            notificationChannel.description = "Time for breakfast"
-            val notificationManager = requireActivity().getSystemService(
-                NotificationManager::class.java
-            )
-            notificationManager.createNotificationChannel(notificationChannel)
-        }
-
-
-    }
 
 }
