@@ -43,6 +43,7 @@ class CameraViewModel(app: Application) : BaseViewModel(app) {
                         UserMealImage(
                             null,
                             currentUser.uid,
+                            currentUser.displayName?:"",
                             it.toString(),
                             Date()
                         )

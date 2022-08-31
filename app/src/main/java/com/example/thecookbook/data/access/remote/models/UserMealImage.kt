@@ -7,8 +7,9 @@ data class UserMealImage(
     @DocumentId
     val id:String?,
     val userId: String,
+    val userName: String,
     val downloadUrl: String,
     val date: Date
 ){
-    constructor():this("","","", Date())
+    constructor():this("","", "","", Date())
 }

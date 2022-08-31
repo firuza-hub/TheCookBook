@@ -14,21 +14,32 @@
             android:layout_height="0dp"
             android:layout_marginTop="6dp"
             android:layout_marginBottom="16dp"
-            app:layout_constraintBottom_toTopOf="@+id/btnStartTimer"
+            app:layout_constraintBottom_toTopOf="@+id/btnTakePicture"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
 
         <Button
-            android:id="@+id/btnStartTimer"
+            android:id="@+id/btnTakePicture"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
             android:text="TAKE A PIC"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintEnd_toStartOf="@+id/btnSavePicture"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent" />
+
+        <Button
+            android:id="@+id/btnSavePicture"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:text="SAVE"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/btnTakePicture" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

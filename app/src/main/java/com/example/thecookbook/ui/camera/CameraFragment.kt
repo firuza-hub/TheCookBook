@@ -2,14 +2,10 @@ package com.example.thecookbook.ui.camera
 
 import android.Manifest
 import android.app.Activity
-import android.app.NotificationChannel
-import android.app.NotificationManager
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.BitmapFactory
-import android.graphics.Color
 import android.net.Uri
-import android.os.Build
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
@@ -25,6 +21,7 @@ import androidx.core.content.FileProvider
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.Navigation
 import com.example.thecookbook.BuildConfig
 import com.example.thecookbook.R
 import com.example.thecookbook.databinding.FragmentCameraBinding
@@ -50,7 +47,7 @@ class CameraFragment : Fragment() {
         ) { result ->
             if (result.resultCode == Activity.RESULT_OK) {
 
-                setPic(true)
+                setPic()
             }
         }
         requestPermissionLauncher = registerForActivityResult(
@@ -89,15 +86,20 @@ class CameraFragment : Fragment() {
         recipeId = args.recipeId
         _viewModel = ViewModelProvider(this)[CameraViewModel::class.java]
 
-
-        binding.btnStartTimer.setOnClickListener {
+        binding.btnTakePicture.setOnClickListener {
             requestCameraPermissionAndOpenCamera()
+        }
+        binding.btnSavePicture.setOnClickListener {
+           if( binding.ivMeal.drawable != null){
+               savePic()
+               Navigation.findNavController(binding.root).popBackStack()
+           }
         }
 
         return binding.root
     }
 
-    private fun setPic(save: Boolean) {
+    private fun setPic() {
         // Get the dimensions of the View
         val targetW: Int = binding.ivMeal.width
         val targetH: Int = binding.ivMeal.height
@@ -105,8 +107,6 @@ class CameraFragment : Fragment() {
         val bmOptions = BitmapFactory.Options().apply {
             // Get the dimensions of the bitmap
             inJustDecodeBounds = true
-
-            BitmapFactory.decodeFile(currentPhotoPath, this)
 
             val photoW: Int = outWidth
             val photoH: Int = outHeight
@@ -121,10 +121,35 @@ class CameraFragment : Fragment() {
         }
         BitmapFactory.decodeFile(currentPhotoPath, bmOptions)?.also { bitmap ->
             binding.ivMeal.setImageBitmap(bitmap)
-        //TODO: Add button for save image, that will trigger the method below
-            if(save) _viewModel.savePic(bitmap, recipeId, currentPhotoName)
         }
     }
+
+    private fun savePic() {
+        // Get the dimensions of the View
+        val targetW: Int = binding.ivMeal.width
+        val targetH: Int = binding.ivMeal.height
+
+        val bmOptions = BitmapFactory.Options().apply {
+            // Get the dimensions of the bitmap
+            inJustDecodeBounds = true
+
+            val photoW: Int = outWidth
+            val photoH: Int = outHeight
+
+            // Determine how much to scale down the image
+            val scaleFactor: Int = Math.max(1, Math.min(photoW / targetW, photoH / targetH))
+
+            // Decode the image file into a Bitmap sized to fill the View
+            inJustDecodeBounds = false
+            inSampleSize = scaleFactor
+            inPurgeable = true
+        }
+        BitmapFactory.decodeFile(currentPhotoPath, bmOptions)?.also { bitmap ->
+             _viewModel.savePic(bitmap, recipeId, currentPhotoName)
+            Toast.makeText(requireContext(), "File has been saved successfully!", Toast.LENGTH_SHORT).show()
+        }
+    }
+
 
     private lateinit var currentPhotoPath: String
     private lateinit var currentPhotoName: String
