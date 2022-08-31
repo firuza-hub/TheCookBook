@@ -4,10 +4,9 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/Firuza/AndroidStudioProjects/TheCookBook/app/src/main/res/layout/activity_main.xml" value="0.1" />
-        <entry key="..\:/Users/Firuza/AndroidStudioProjects/TheCookBook/app/src/main/res/layout/fragment_recipe_details.xml" value="0.5" />
+        <entry key="..\:/Users/Firuza/AndroidStudioProjects/TheCookBook/app/src/main/res/layout/fragment_recipe_details.xml" value="0.2324074074074074" />
         <entry key="..\:/Users/Firuza/AndroidStudioProjects/TheCookBook/app/src/main/res/layout/fragment_recipes.xml" value="0.1734375" />
         <entry key="..\:/Users/Firuza/AndroidStudioProjects/TheCookBook/app/src/main/res/layout/fragment_recipes_item.xml" value="0.4" />
-        <entry key="..\:/Users/Firuza/AndroidStudioProjects/TheCookBook/app/src/main/res/menu/menu.xml" value="0.35052083333333334" />
         <entry key="..\:/Users/Firuza/StudioProjects/TheCookBook/app/src/main/res/drawable/bg_grey_rounded.xml" value="0.158" />
         <entry key="..\:/Users/Firuza/StudioProjects/TheCookBook/app/src/main/res/drawable/bg_white_rounded.xml" value="0.2225" />
         <entry key="..\:/Users/Firuza/StudioProjects/TheCookBook/app/src/main/res/drawable/ic_back.xml" value="0.124" />
@@ -19,6 +18,8 @@
         <entry key="..\:/Users/Firuza/StudioProjects/TheCookBook/app/src/main/res/layout/activity_main.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Firuza/StudioProjects/TheCookBook/app/src/main/res/layout/fragment_camera.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Firuza/StudioProjects/TheCookBook/app/src/main/res/layout/fragment_recipe_details.xml" value="0.264" />
+        <entry key="..\:/Users/Firuza/StudioProjects/TheCookBook/app/src/main/res/layout/fragment_recipe_images.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/Firuza/StudioProjects/TheCookBook/app/src/main/res/layout/fragment_recipe_images_item.xml" value="0.253125" />
         <entry key="..\:/Users/Firuza/StudioProjects/TheCookBook/app/src/main/res/layout/fragment_recipes.xml" value="0.1" />
         <entry key="..\:/Users/Firuza/StudioProjects/TheCookBook/app/src/main/res/layout/fragment_recipes_item.xml" value="0.2" />
         <entry key="..\:/Users/Firuza/StudioProjects/TheCookBook/app/src/main/res/layout/fragment_timer.xml" value="0.25416666666666665" />

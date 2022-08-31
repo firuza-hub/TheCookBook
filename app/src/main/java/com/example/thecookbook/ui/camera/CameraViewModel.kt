@@ -53,5 +53,8 @@ class CameraViewModel(app: Application) : BaseViewModel(app) {
             }
     }
 
+    fun getPics(recipeId: String): List<UserMealImage> {
+        return firebaseService.getUserMealImagesByRecipeId(recipeId)
+    }
 
 }

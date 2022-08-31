@@ -4,15 +4,22 @@ import android.view.View
 import android.widget.ImageView
 import androidx.core.net.toUri
 import androidx.databinding.BindingAdapter
+import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.bumptech.glide.Glide
 
 
     @BindingAdapter("imageUrl")
     fun bindImage(imgView: ImageView, imgUrl: String?) {
+        val circularProgressDrawable = CircularProgressDrawable(imgView.context)
+        circularProgressDrawable.strokeWidth = 5f
+        circularProgressDrawable.centerRadius = 30f
+        circularProgressDrawable.start()
+
         imgUrl?.let {
             val imgUri = imgUrl.toUri().buildUpon().scheme("https").build()
             Glide.with(imgView.context)
                 .load(imgUri)
+                .placeholder(circularProgressDrawable)
                 .centerCrop()
                 .into(imgView)
         }

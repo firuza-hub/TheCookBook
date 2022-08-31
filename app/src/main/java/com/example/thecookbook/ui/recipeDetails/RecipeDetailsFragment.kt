@@ -11,6 +11,7 @@ import androidx.navigation.Navigation
 import com.bumptech.glide.Glide
 import com.example.thecookbook.R
 import com.example.thecookbook.databinding.FragmentRecipeDetailsBinding
+import com.example.thecookbook.ui.recipesList.RecipesFragmentDirections
 
 class RecipeDetailsFragment : Fragment() {
 
@@ -47,6 +48,10 @@ class RecipeDetailsFragment : Fragment() {
         }
         binding.fabTakePhoto.setOnClickListener{
             Navigation.findNavController(binding.root).navigate(RecipeDetailsFragmentDirections.actionRecipeDetailsFragmentToCameraFragment(args.recipe.id))
+        }
+        binding.ivRecipeImage.setOnLongClickListener {
+            Navigation.findNavController(binding.root).navigate(RecipeDetailsFragmentDirections.actionRecipeDetailsFragmentToRecipeImagesFragment(args.recipe.id))
+            return@setOnLongClickListener true
         }
         //TODO: Add button for redirection to grid of images by this and other users for the current recipe
 
