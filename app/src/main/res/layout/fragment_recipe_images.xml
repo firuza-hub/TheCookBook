@@ -19,7 +19,7 @@
             android:layout_height="match_parent"
             android:fadeVisible="@{viewModel.showNoConnection.booleanValue()}"
             android:gravity="center"
-            android:text="No Internet Connection."
+            android:text="@string/no_internet_connection"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

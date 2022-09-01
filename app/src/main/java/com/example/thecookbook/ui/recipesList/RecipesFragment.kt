@@ -34,6 +34,7 @@ class RecipesFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener{
         binding.viewModel = _viewModel
         binding.lifecycleOwner = viewLifecycleOwner
         setupRecyclerView()
+
         binding.svRecipes.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 return false

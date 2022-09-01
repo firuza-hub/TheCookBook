@@ -32,8 +32,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="26dp"
-            android:text="Make your own food,\nstay at home"
-            android:textSize="22dp"
+            android:text="@string/make_your_own_food_stay_at_home"
+            android:textSize="22sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -73,8 +73,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginTop="20dp"
-            android:text="Popular Recipes"
-            android:textSize="20dp"
+            android:text="@string/popular_recipes"
+            android:textSize="20sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/svRecipes" />

@@ -17,8 +17,8 @@ class FirebaseService() {
     private var images = listOf<UserMealImage>()
     private val recipesCollection = db.collection("recipes")
 
-    fun getRecipes(): List<Recipe> {
-       runBlocking {   readAllRecipesData()}
+    suspend fun getRecipes(): List<Recipe> {
+        readAllRecipesData()
         return recipes
     }
 

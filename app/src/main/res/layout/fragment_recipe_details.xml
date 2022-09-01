@@ -40,11 +40,13 @@
                     android:background="@drawable/round_button"
                     android:elevation="1dp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:contentDescription="@string/go_back" />
 
                 <ImageView
                     android:id="@+id/ivRecipeImage"
                     android:layout_width="0dp"
+                    android:contentDescription="@string/recipe_image"
                     android:layout_height="0dp"
                     android:background="@drawable/lunch"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -82,7 +84,8 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/ic_drag_handle" />
+                    app:srcCompat="@drawable/ic_drag_handle"
+                    android:contentDescription="@string/drag_handle" />
 
                 <TextView
                     android:id="@+id/tvName"
@@ -124,7 +127,7 @@
                     android:id="@+id/tvServings"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:hint="1\nserving(s)"
+                    android:hint="@string/hint_serving"
                     android:text="@{@string/generic_text_servings(recipe.servings)}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.5"
@@ -137,23 +140,31 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
                     android:layout_marginTop="20dp"
-                    android:text="Directions"
+                    android:text="@string/recipe_directions"
                     android:textSize="20sp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tvCookTime" />
 
-                <TextView
-                    android:id="@+id/tvDirection"
+                <ScrollView
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="0dp"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="16dp"
                     android:layout_marginEnd="16dp"
-                    android:text="@string/mock_directions"
+                    android:layout_marginBottom="6dp"
+                    app:layout_constraintBottom_toTopOf="@+id/fabTakePhoto"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tvDirectionsHeader" />
+                    app:layout_constraintTop_toBottomOf="@+id/tvDirectionsHeader">
+
+                    <TextView
+                        android:id="@+id/tvDirection"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:hint="@string/mock_directions" />
+
+                </ScrollView>
 
                 <com.google.android.material.floatingactionbutton.FloatingActionButton
                     android:id="@+id/fabTakePhoto"

@@ -29,7 +29,8 @@
                 android:id="@+id/imageView"
                 imageUrl="@{recipe.imageUrl}"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
+                android:layout_height="match_parent"
+                android:contentDescription="@string/recipe_image" />
 
 
         </androidx.cardview.widget.CardView>
@@ -40,7 +41,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginBottom="16dp"
-            android:hint="Recipe name"
+            android:hint="@string/recipe_name"
             android:text="@{recipe.name}"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
