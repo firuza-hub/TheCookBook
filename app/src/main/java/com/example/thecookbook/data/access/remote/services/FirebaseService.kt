@@ -4,6 +4,7 @@ import android.util.Log
 import com.example.thecookbook.data.access.remote.models.Recipe
 import com.example.thecookbook.data.access.remote.models.UserMealImage
 import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.firestore.ktx.toObjects
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
@@ -17,9 +18,11 @@ class FirebaseService() {
     private var images = listOf<UserMealImage>()
     private val recipesCollection = db.collection("recipes")
 
+
     suspend fun getRecipes(): List<Recipe> {
-        readAllRecipesData()
-        return recipes
+        return withContext(Dispatchers.IO) {
+            return@withContext recipesCollection.get().await().toObjects(Recipe::class.java)
+        }
     }
 
     suspend fun getUserMealImagesByRecipeId(recipeId: String): List<UserMealImage> {
@@ -43,23 +46,8 @@ class FirebaseService() {
             }
     }
 
-    private suspend fun readAllRecipesData() {
-        withContext(Dispatchers.IO) {
-
-            recipesCollection.get()
-                .addOnFailureListener { Log.i("RECIPES_LIST", it.message.toString()) }
-                .addOnSuccessListener {
-                    Log.i("RECIPES_LIST", "SUCCESS!")
-                    recipes = it.toObjects(Recipe::class.java)
-                    Log.i("RECIPES_LIST",recipes.toString())
-
-                }.await()
-        }
-    }
-
     suspend fun getRecipesByNameFirestore(searchText: String): List<Recipe> {
-        readAllRecipesData()
-        return recipes.filter { r -> searchText.isEmpty() || searchText in r.name.lowercase() }
+        return getRecipes().filter { r -> searchText.isEmpty() || searchText in r.name.lowercase() }
     }
 
 }

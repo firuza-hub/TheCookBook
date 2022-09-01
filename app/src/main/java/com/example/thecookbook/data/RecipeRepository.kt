@@ -29,6 +29,7 @@ class RecipeRepository(private val db: RecipeDB, private val firebaseService: Fi
     }
 
     private suspend fun fetchNewRecipes() {
-        db.recipeDao.insertRecipes(firebaseService.getRecipes().asDatabaseModel())
+        val recipesFromRemote = firebaseService.getRecipes()
+        db.recipeDao.insertRecipes(recipesFromRemote.asDatabaseModel())
     }
 }

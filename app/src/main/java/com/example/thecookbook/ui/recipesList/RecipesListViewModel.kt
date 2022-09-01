@@ -21,12 +21,12 @@ class RecipesListViewModel(application: Application) : BaseViewModel(application
         refreshList()
     }
 
-    fun getRecipesByName(s: String) {
+    fun getRecipesByName(searchText: String) {
         if(checkForInternet(getApplication())){
             viewModelScope.launch {
-                recipes.value =  firebaseService.getRecipesByNameFirestore(s)}
+                recipes.value =  firebaseService.getRecipesByNameFirestore(searchText)}
         } else {
-            recipes.value = if(repo.recipes.value == null) emptyList<Recipe>() else repo.recipes.value
+            repo.recipes.observeForever(Observer { recipes.value = it.filter { r -> searchText.isEmpty() || searchText in r.name.lowercase() } })
         }
 
     }
@@ -36,7 +36,7 @@ class RecipesListViewModel(application: Application) : BaseViewModel(application
             viewModelScope.launch {
                 recipes.value =  firebaseService.getRecipes()}
         } else {
-            recipes.value = if(repo.recipes.value == null) emptyList<Recipe>() else repo.recipes.value
+            repo.recipes.observeForever(Observer { recipes.value = it })
         }
     }
 

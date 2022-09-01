@@ -1,6 +1,7 @@
 package com.example.thecookbook.worker
 
 import android.content.Context
+import android.util.Log
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.get
 import androidx.work.CoroutineWorker
@@ -20,6 +21,7 @@ class RefreshDataWorker(appContext: Context, params: WorkerParameters) : Corouti
     }
 
     override suspend fun doWork(): Result {
+        Log.i("WORKER_RECIPES", "doWork Started")
         val database = getDatabase(applicationContext)
         val firebaseService = FirebaseService()
 
