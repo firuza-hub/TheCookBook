@@ -33,6 +33,7 @@ class RecipeImagesItemAdaptor: RecyclerView.Adapter<RecipeImagesItemAdaptor.Reci
 
     fun setNewData(newData: List<UserMealImage>){
         data = newData as MutableList<UserMealImage>
+        notifyDataSetChanged()
     }
     class RecipeImagesViewHolder(val binding: FragmentRecipeImagesItemBinding):RecyclerView.ViewHolder(binding.root) { }
 }

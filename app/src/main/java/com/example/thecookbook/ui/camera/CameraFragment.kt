@@ -20,6 +20,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import com.example.thecookbook.BuildConfig
@@ -33,7 +34,7 @@ import java.util.*
 
 
 class CameraFragment : Fragment() {
-    private lateinit var _viewModel: CameraViewModel
+    private  val _viewModel: CameraViewModel by viewModels { CameraViewModel.Factory(requireActivity().application, recipeId) }
     private lateinit var binding: FragmentCameraBinding
     private lateinit var requestPermissionLauncher: ActivityResultLauncher<String>
     private lateinit var cameraActivityResultLauncher: ActivityResultLauncher<Intent>
@@ -84,7 +85,6 @@ class CameraFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_camera, container, false)
         val args = CameraFragmentArgs.fromBundle(requireArguments())
         recipeId = args.recipeId
-        _viewModel = ViewModelProvider(this)[CameraViewModel::class.java]
 
         binding.btnTakePicture.setOnClickListener {
             requestCameraPermissionAndOpenCamera()

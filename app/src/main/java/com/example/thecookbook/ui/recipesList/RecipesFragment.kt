@@ -5,16 +5,20 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SearchView
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.thecookbook.R
 import com.example.thecookbook.data.access.remote.models.Recipe
 import com.example.thecookbook.databinding.FragmentRecipesBinding
 
-class RecipesFragment : Fragment() {
+
+class RecipesFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener{
     private lateinit var _viewModel: RecipesListViewModel
     private lateinit var binding: FragmentRecipesBinding
 
@@ -41,6 +45,12 @@ class RecipesFragment : Fragment() {
             }
         })
 
+        binding.srlRecipes.setOnRefreshListener(this)
+
+        binding.srlRecipes.setColorSchemeResources(R.color.design_default_color_primary,
+            android.R.color.holo_green_dark,
+            android.R.color.holo_orange_dark,
+            android.R.color.holo_blue_dark)
 
         return binding.root
     }
@@ -63,6 +73,11 @@ class RecipesFragment : Fragment() {
             layoutManager = GridLayoutManager(context, 2, GridLayoutManager.VERTICAL, false)
 
         }
+    }
+
+    override fun onRefresh() {
+        _viewModel.refreshList()
+        binding.srlRecipes.isRefreshing = false
     }
 
 

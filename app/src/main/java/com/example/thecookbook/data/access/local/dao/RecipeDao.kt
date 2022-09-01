@@ -9,6 +9,10 @@ interface RecipeDao {
     @Query("select * from DatabaseRecipes")
     fun getRecipes(): LiveData<List<DatabaseRecipe>>
 
+
+    @Query("select * from DatabaseRecipes where DatabaseRecipes.name LIKE :name ")
+    fun getRecipesByName(name: String): LiveData<List<DatabaseRecipe>>
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertRecipes(Recipes: List<DatabaseRecipe>)
 

@@ -28,8 +28,7 @@ class RecipeRepository(private val db: RecipeDB, private val firebaseService: Fi
         db.recipeDao.deleteAllRecipes()
     }
 
-    private fun fetchNewRecipes() {
-
+    private suspend fun fetchNewRecipes() {
         db.recipeDao.insertRecipes(firebaseService.getRecipes().asDatabaseModel())
     }
 }

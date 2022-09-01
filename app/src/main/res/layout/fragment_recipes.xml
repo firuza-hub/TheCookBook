@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="viewModel"
             type="com.example.thecookbook.ui.recipesList.RecipesListViewModel" />
@@ -24,6 +25,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
         <TextView
             android:id="@+id/tvHeader"
             android:layout_width="wrap_content"
@@ -48,16 +50,22 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvHeader" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvRecipesList"
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/srlRecipes"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginTop="16dp"
-            android:padding="6dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvListHeader" />
+            app:layout_constraintTop_toBottomOf="@+id/tvListHeader">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvRecipesList"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="6dp"/>
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
         <TextView
             android:id="@+id/tvListHeader"
