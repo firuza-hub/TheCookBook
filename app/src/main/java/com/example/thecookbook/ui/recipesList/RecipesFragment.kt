@@ -16,6 +16,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.thecookbook.R
 import com.example.thecookbook.data.access.remote.models.Recipe
 import com.example.thecookbook.databinding.FragmentRecipesBinding
+import com.google.firebase.auth.FirebaseAuth
 
 
 class RecipesFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener{
@@ -53,6 +54,9 @@ class RecipesFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener{
             android.R.color.holo_orange_dark,
             android.R.color.holo_blue_dark)
 
+        binding.btnLogout.setOnClickListener{
+            FirebaseAuth.getInstance().signOut()
+        }
         return binding.root
     }
 

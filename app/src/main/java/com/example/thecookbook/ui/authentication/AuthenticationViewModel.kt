@@ -5,8 +5,12 @@ import androidx.lifecycle.map
 import com.google.firebase.auth.FirebaseAuth
 
 class AuthenticationViewModel: ViewModel() {
-    val authenticationState = FirebaseUserLiveData().map { _ ->
-        AuthenticationState.AUTHENTICATED
+    val authenticationState = FirebaseUserLiveData().map { user ->
+        if (user != null) {
+            AuthenticationState.AUTHENTICATED
+        } else {
+            AuthenticationState.UNAUTHENTICATED
+        }
     }
 
     fun logout() {

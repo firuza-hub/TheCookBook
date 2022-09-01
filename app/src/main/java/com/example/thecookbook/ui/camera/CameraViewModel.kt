@@ -3,6 +3,7 @@ package com.example.thecookbook.ui.camera
 import android.app.Application
 import android.graphics.Bitmap
 import android.util.Log
+import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
@@ -54,7 +55,7 @@ class CameraViewModel(application: Application,private  val recipeId: String) : 
                 mountainsRef.downloadUrl.addOnSuccessListener {
                     Log.i("MYCAMERA", "download url: $it")
 
-                    val currentUser =FirebaseAuth.getInstance().currentUser ?: throw Exception("not logged in")
+                    val currentUser = FirebaseAuth.getInstance().currentUser ?: throw Exception("not logged in")
                     firebaseService.addUserMealImageByRecipeId(
                         recipeId,
                         UserMealImage(
@@ -65,6 +66,11 @@ class CameraViewModel(application: Application,private  val recipeId: String) : 
                             Date()
                         )
                     )
+                    Toast.makeText(
+                        getApplication(),
+                        "File has been saved successfully!",
+                        Toast.LENGTH_SHORT
+                    ).show()
 
                 }
 

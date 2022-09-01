@@ -34,7 +34,12 @@ import java.util.*
 
 
 class CameraFragment : Fragment() {
-    private  val _viewModel: CameraViewModel by viewModels { CameraViewModel.Factory(requireActivity().application, recipeId) }
+    private val _viewModel: CameraViewModel by viewModels {
+        CameraViewModel.Factory(
+            requireActivity().application,
+            recipeId
+        )
+    }
     private lateinit var binding: FragmentCameraBinding
     private lateinit var requestPermissionLauncher: ActivityResultLauncher<String>
     private lateinit var cameraActivityResultLauncher: ActivityResultLauncher<Intent>
@@ -60,7 +65,7 @@ class CameraFragment : Fragment() {
                     "Permission granted now you can read the storage",
                     Toast.LENGTH_LONG
                 ).show()
-               dispatchTakePictureIntent()
+                dispatchTakePictureIntent()
             } else {
                 Snackbar.make(
                     requireActivity().findViewById(android.R.id.content),
@@ -85,15 +90,15 @@ class CameraFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_camera, container, false)
         val args = CameraFragmentArgs.fromBundle(requireArguments())
         recipeId = args.recipeId
-
+        binding.viewModel = _viewModel
         binding.btnTakePicture.setOnClickListener {
             requestCameraPermissionAndOpenCamera()
         }
         binding.btnSavePicture.setOnClickListener {
-           if( binding.ivMeal.drawable != null){
-               savePic()
-               Navigation.findNavController(binding.root).popBackStack()
-           }
+            if (binding.ivMeal.drawable != null) {
+                savePic()
+                Navigation.findNavController(binding.root).popBackStack()
+            }
         }
 
         return binding.root
@@ -145,8 +150,7 @@ class CameraFragment : Fragment() {
             inPurgeable = true
         }
         BitmapFactory.decodeFile(currentPhotoPath, bmOptions)?.also { bitmap ->
-             _viewModel.savePic(bitmap, recipeId, currentPhotoName)
-            Toast.makeText(requireContext(), "File has been saved successfully!", Toast.LENGTH_SHORT).show()
+            _viewModel.savePic(bitmap, recipeId, currentPhotoName)
         }
     }
 
